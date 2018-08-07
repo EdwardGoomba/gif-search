@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 export default class SearchForm extends Component {
   
@@ -7,12 +7,13 @@ export default class SearchForm extends Component {
   }
   
   onSearchChange = e => {
-    this.setState({ searchText: e.target.value });
+    this.setState({ searchText: e.target.value })
   }
   
   handleSubmit = e => {
-    e.preventDefault();
-    e.currentTarget.reset();
+    e.preventDefault()
+    this.props.onSearch(this.state.searchText)
+    e.currentTarget.reset()
   }
   
   render() {  
@@ -25,6 +26,6 @@ export default class SearchForm extends Component {
                placeholder="Search..." />
         <button type="submit" id="submit" className="search-button"><i className="material-icons icn-search">search</i></button>
       </form>      
-    );
+    )
   }
 }

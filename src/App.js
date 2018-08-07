@@ -37,6 +37,19 @@ export default class App extends Component {
     //   })
   }
 
+  performSearch = (search) => {
+    const url = `http://api.giphy.com/v1/gifs/search?q=${search}&limit=24&api_key=dc6zaTOxFJmzC`
+    axios.get(url)
+      .then(res => {
+        this.setState({
+          gifs: res.data.data
+        })
+      })
+      .catch(error => {
+        console.log('Error fetching and parsing data', error);
+      });
+  }
+
   render() {
     console.log(this.state.gifs) 
     return (
@@ -44,7 +57,7 @@ export default class App extends Component {
         <div className="main-header">
           <div className="inner">
             <h1 className="main-title">GifSearch</h1>
-            <SearchForm />      
+            <SearchForm onSearch={this.performSearch} />      
           </div>   
         </div>    
         <div className="main-content">
