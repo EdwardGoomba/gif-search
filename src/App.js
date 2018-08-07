@@ -9,7 +9,8 @@ export default class App extends Component {
   constructor() {
     super()
     this.state={
-      gifs: []
+      gifs: [],
+      loading: true
     }
   }
 
@@ -23,7 +24,8 @@ export default class App extends Component {
     axios.get(url)
       .then(res => {
         this.setState({
-          gifs: res.data.data
+          gifs: res.data.data,
+          loading: false
         })
       })
       .catch(error => {
@@ -42,7 +44,11 @@ export default class App extends Component {
           </div>   
         </div>    
         <div className="main-content">
-          <GifList data={this.state.gifs} />
+          {
+            (this.state.loading)
+            ? <p>Loading...</p>
+              : <GifList data={this.state.gifs} />
+          }
         </div>
       </div>
     )
